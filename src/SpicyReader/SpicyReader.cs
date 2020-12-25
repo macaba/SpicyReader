@@ -51,11 +51,12 @@ namespace SpicyReader
                         lineOffset += 512;
                     }
 
+                    var span = packet.Data.AsSpan();
                     for (int pixel = 0; pixel < 512; pixel++)
                     {
-                        var span = packet.Data.AsSpan().Slice(24 + (pixel * 2), 2);
-                        span.Reverse();
-                        var number = BitConverter.ToUInt16(span);
+                        var ushortSpan = span.Slice(24 + (pixel * 2), 2);
+                        ushortSpan.Reverse();
+                        var number = BitConverter.ToUInt16(ushortSpan);
                         number *= 20;
                         integers[lineCounter, lineOffset + pixel] = number;
                     }
