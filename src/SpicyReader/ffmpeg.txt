@@ -1,0 +1,1 @@
+ffmpeg -i %d.tiff -crf 0 OUT.mp4
